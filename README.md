@@ -28,10 +28,10 @@ Create a new VM with below minimum settings:
 -	No install media
 -	Single virtio NIC on vmbr0 bridge for the management interface (fxp0)
 -	Add serial port for terminal access.
-	Command to access the console: ‘qm terminal <VMID>’
+	Command to access the console: ‘qm terminal <vmid>’
 
 Import qcow2 file as a drive attached to the new VM via CLI:
--	‘qm importdisk <VMID> <imagefilename.qcow2> <storage-pool> -format qcow2’
+-	‘qm importdisk <vmid> <imagefilename.qcow2> <storage-pool> -format qcow2’
 -	The disk should show up in the UI as ‘Unused Disk 0’ in the Hardware section of the VM.
 -	Click the disk, then ‘Edit’. Change to ‘VirtIO/Block’ and then click ‘Add’.
 -	Go to Options and change the boot order so the new disk is the first boot option.
@@ -42,15 +42,17 @@ Set the qemu args properly as below once the VMs are created from UI:
 
 	for vjunos-switch add below line at the staring of the file:
 ```	
-	"args: -machine accel=kvm:tcg -smbios type=1,product=VM-VEX -cpu 'host,kvm=on'"
+	args: -machine accel=kvm:tcg -smbios type=1,product=VM-VEX -cpu 'host,kvm=on'
 ```
 
 	for vjunos-router add below line at the staring of the file:
+ 
 ```
 	"args: -machine accel=kvm:tcg -smbios type=1,product=VM-VMX,family=lab -cpu 'host,kvm=on'"
 ```
 
 	for vjunos-evolved add below line at the staring of the file:
+
 ```
 	"args: -machine accel=kvm:tcg -smbios 'type=0,vendor=Bochs,version=Bochs'  -smbios 'type=3,manufacturer=Bochs' -smbios 'type=1,manufacturer=Bochs,product=Bochs,serial=chassis_no=0:slot=0:type=1:assembly_id=0x0d20:platform=251:master=0: channelized=yes' -cpu host"
 ```
