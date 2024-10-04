@@ -27,8 +27,7 @@ Create a new VM with below minimum settings:
 -	No hard drive
 -	No install media
 -	Single virtio NIC on vmbr0 bridge for the management interface (fxp0)
--	Add serial port for terminal access.
-	Command to access the console:
+-	Add serial port for terminal access. Command to access the vJunos console:
 ```
 	qm terminal <vmid>
 ```
@@ -44,29 +43,30 @@ Import qcow2 file as a drive attached to the new VM via CLI:
 
 Set the qemu args properly as below once the VMs are created from UI:
 -	get the VM id for the vJuons VM and edit respective VM config file located at: ‘/etc/pve/qemu-server/\<vmid\>.conf’
-- 	add the specific qemu args at ‘/etc/pve/qemu-server/vmid.conf’ as below:
+- 	add the specific qemu args at ‘/etc/pve/qemu-server/\<vmid\>.conf’ as below:
 	for vjunos-switch add below line at the staring of the file:
 ```	
 	args: -machine accel=kvm:tcg -smbios type=1,product=VM-VEX -cpu 'host,kvm=on'
 ```
 - 	for vjunos-router add below line at the staring of the file:
 ```
-	"args: -machine accel=kvm:tcg -smbios type=1,product=VM-VMX,family=lab -cpu 'host,kvm=on'"
+	args: -machine accel=kvm:tcg -smbios type=1,product=VM-VMX,family=lab -cpu 'host,kvm=on'
 ```
 - 	for vjunos-evolved add below line at the staring of the file:
 ```
-	"args: -machine accel=kvm:tcg -smbios 'type=0,vendor=Bochs,version=Bochs'  -smbios 'type=3,manufacturer=Bochs' -smbios 'type=1,manufacturer=Bochs,product=Bochs,serial=chassis_no=0:slot=0:type=1:assembly_id=0x0d20:platform=251:master=0: channelized=yes' -cpu host"
+	args: -machine accel=kvm:tcg -smbios 'type=0,vendor=Bochs,version=Bochs'  -smbios 'type=3,manufacturer=Bochs' -smbios 'type=1,manufacturer=Bochs,product=Bochs,serial=chassis_no=0:slot=0:type=1:assembly_id=0x0d20:platform=251:master=0: channelized=yes' -cpu host
+```	
+Power on VM and ensure that the vJunos VM boots. From here you can assign an IP address to fxp0 or you can shut the VM down and make it into a template for cloning to new vjunos nodes.
+
+
+Note: All vJunos need to shutdown gracefully to maintain the last committed config for next boot. Use the below junos CLI command to power down the vJunos:
 ```
-	
-Power on VM and ensure that it boots. From here you can assign an IP address to fxp0 or you can shut the VM down and make it into a template for cloning to new vjunos nodes.
-
-Please not: All vJunos need to shutdown gracefully from the junos CLI only using below command:
-- ‘request system power-off at now’ to maintain the last config at need boot. Shutdown from shell or power off the VM can corrupt the VM Disk or laest config files.
-
-Therefore, to keep the last comitted config for next boot always gracefully shutdown the vJunos VM
+request system power-off at now
+```
+Shutdown from junos shell or power off the VM can corrupt the VM disk or the latest committed config. Therefore, to keep the last committed config always gracefully shutdown the vJunos VM.
 
 Alternately, you can use below 2 scripts to automate the VM boot(for vJunos-switch or vJunos-router) 
-- "rebuild-vjunos.sh" : boot vJunos VM with pre-loaded base configs at first boot
+- "rebuild-vjunos.sh" : boot vJunos VM with pre-loaded base config at first boot
 - "rebuild-vjunos-shutdown.sh" : download the latest config from live vJunos node and prepare the VM Disks for next boot with latest config.      
 
 
