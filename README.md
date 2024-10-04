@@ -13,7 +13,8 @@ The vJunosEvolved is built using PTX10001-36MR as a reference Juniper switch, wh
 The vJunos node is a single virtual machine (VM) that is targeted for lab environment only and not for production environment. 
 The vJunos nodes supports a bandwidth of up to 100 Mbps aggregated over all the interfaces. You can configure and manage the vJunos nodes in the same way as you manage a physical node.
 
-This article explains the vJunos installation on a Proxmox server as VM:
+This article explains the vJunos installation on a Proxmox server as VM.
+
 
 ### Create the base vJunos VMs
 
@@ -70,7 +71,9 @@ Alternately, you can use below 2 scripts to automate the VM boot(for vJunos-swit
 - "rebuild-vjunos-shutdown.sh" : download the latest config from live vJunos node and prepare the VM Disks for next boot with latest config.      
 
 
+
 ### Boot vJunos VM with pre-loaded base configs 
+
 - copy the disk folder under /root/
 - Edit the below .sh scripts & provide the vjunos Image location & proxmox LVM/DISK storage name
 ```
@@ -90,7 +93,10 @@ Alternately, you can use below 2 scripts to automate the VM boot(for vJunos-swit
 ```
 - next normally boot the vjunos node and 
 
+
+
 ### Shutdown script to prepare VM Disks with latest config for nxct boot
+
 - copy the disk folder under /root/
 - Edit the below .sh scripts & provide the vjunos Image location & proxmox LVM/DISK storage name
 ```
