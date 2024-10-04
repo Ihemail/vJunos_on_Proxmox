@@ -23,12 +23,12 @@ Copy vJunos images(qcow2) file to Proxmox server
 
 Create a new VM with below minimum settings:
 -	Cpu: 4 cores 
--	RAM: 5Gb(for vjunos-switch/router), 8Gb(for vJunosEvolved)
+-	Memory: 5Gb(for vjunos-switch/router), 8Gb(for vJunosEvolved)
 -	No hard drive
 -	No install media
 -	Single virtio NIC on vmbr0 bridge for the management interface (fxp0)
 -	Add serial port for terminal access.
-	cmd to access the console: ‘qm terminal <VMID>’
+	Command to access the console: ‘qm terminal <VMID>’
 
 Import qcow2 file as a drive attached to the new VM via CLI:
 -	‘qm importdisk <VMID> <imagefilename.qcow2> <storage-pool> -format qcow2’
