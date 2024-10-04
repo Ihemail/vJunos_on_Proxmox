@@ -28,17 +28,23 @@ Create a new VM with below minimum settings:
 -	No install media
 -	Single virtio NIC on vmbr0 bridge for the management interface (fxp0)
 -	Add serial port for terminal access.
-	Command to access the console: ‘qm terminal <vmid>’
+	Command to access the console:
+```
+	qm terminal <vmid>
+```
 
 Import qcow2 file as a drive attached to the new VM via CLI:
--	‘qm importdisk <vmid> <imagefilename.qcow2> <storage-pool> -format qcow2’
+-	Import corresponding vJunos Image to the base vJunos VM
+```
+	qm importdisk <vmid> <imagefilename.qcow2> <storage-pool> -format qcow2
+```
 -	The disk should show up in the UI as ‘Unused Disk 0’ in the Hardware section of the VM.
 -	Click the disk, then ‘Edit’. Change to ‘VirtIO/Block’ and then click ‘Add’.
 -	Go to Options and change the boot order so the new disk is the first boot option.
 
 Set the qemu args properly as below once the VMs are created from UI:
--	get the VM id for the vJuons VM and edit respective VM config file located at: ‘/etc/pve/qemu-server/<vmid>.conf’
-- 	add the specific qemu args at ‘/etc/pve/qemu-server/<VMID>.conf’ as below:
+-	get the VM id for the vJuons VM and edit respective VM config file located at: ‘/etc/pve/qemu-server/\<vmid\>.conf’
+- 	add the specific qemu args at ‘/etc/pve/qemu-server/vmid.conf’ as below:
 	for vjunos-switch add below line at the staring of the file:
 ```	
 	args: -machine accel=kvm:tcg -smbios type=1,product=VM-VEX -cpu 'host,kvm=on'
