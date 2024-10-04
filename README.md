@@ -22,7 +22,7 @@ Copy vJunos images(qcow2) file to Proxmox server
 -	Copy vJunos qcow2 files to new folder(‘/root/import/vjunos/’) on Proxmox host.
 
 Create a new VM with below minimum settings:
--	Cpu: 4 cores 
+-	Cpu: 4 cores <vmid>
 -	Memory: 5Gb(for vjunos-switch/router), 8Gb(for vJunosEvolved)
 -	No hard drive
 -	No install media
@@ -39,20 +39,15 @@ Import qcow2 file as a drive attached to the new VM via CLI:
 Set the qemu args properly as below once the VMs are created from UI:
 -	get the VM id for the vJuons VM and edit respective VM config file located at: ‘/etc/pve/qemu-server/<vmid>.conf’
 - 	add the specific qemu args at ‘/etc/pve/qemu-server/<VMID>.conf’ as below:
-
 	for vjunos-switch add below line at the staring of the file:
 ```	
 	args: -machine accel=kvm:tcg -smbios type=1,product=VM-VEX -cpu 'host,kvm=on'
 ```
-
 - 	for vjunos-router add below line at the staring of the file:
- 
 ```
 	"args: -machine accel=kvm:tcg -smbios type=1,product=VM-VMX,family=lab -cpu 'host,kvm=on'"
 ```
-
 - 	for vjunos-evolved add below line at the staring of the file:
-
 ```
 	"args: -machine accel=kvm:tcg -smbios 'type=0,vendor=Bochs,version=Bochs'  -smbios 'type=3,manufacturer=Bochs' -smbios 'type=1,manufacturer=Bochs,product=Bochs,serial=chassis_no=0:slot=0:type=1:assembly_id=0x0d20:platform=251:master=0: channelized=yes' -cpu host"
 ```
@@ -71,9 +66,11 @@ Alternately, you can use below 2 scripts to automate the VM boot(for vJunos-swit
 
 ### Boot vJunos VM with pre-loaded base configs 
 - copy the disk folder under /root/
-- Edit the below .sh scripts & provide the vjunos Image & proxmox LVM/DISK storage name
+- Edit the below .sh scripts & provide the vjunos Image location & proxmox LVM/DISK storage name
+```
   nano /root/disk/vjunos-switch/rebuild-vjunos.sh
-  nano /root/disk/vjunos-router/rebuild-vjunos.sh  
+  nano /root/disk/vjunos-router/rebuild-vjunos.sh
+```
 - next make sure the vJunos VM is powered off
 - next for vjunos-switch go to /root/disk/vjunos-router and execute the below command:
 ```
@@ -89,7 +86,7 @@ Alternately, you can use below 2 scripts to automate the VM boot(for vJunos-swit
 
 ### Shutdown script to prepare VM Disks with latest config for nxct boot
 - copy the disk folder under /root/
-- Edit the below .sh scripts & provide the vjunos Image & proxmox LVM/DISK storage name
+- Edit the below .sh scripts & provide the vjunos Image location & proxmox LVM/DISK storage name
 ```
   nano /root/disk/vjunos-switch/rebuild-vjunos-shutdown.sh
   nano /root/disk/vjunos-router/rebuild-vjunos-shutdown.sh
