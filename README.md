@@ -22,8 +22,8 @@ Copy vJunos images(qcow2) file to Proxmox server
 -	Copy vJunos qcow2 files to new folder(‘/root/import/vjunos/’) on Proxmox host.
 
 Create a new VM with below minimum settings:
--	cpu: 4 cores 
--	memory: 5Gb(for vjunos-switch/router), 8Gb(for vJunosEvolved)
+-	Cpu: 4 cores 
+-	RAM: 5Gb(for vjunos-switch/router), 8Gb(for vJunosEvolved)
 -	No hard drive
 -	No install media
 -	Single virtio NIC on vmbr0 bridge for the management interface (fxp0)
