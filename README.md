@@ -30,15 +30,15 @@ Create a new VM with below minimum settings:
 -	No install media
 -	Single virtio NIC on vmbr0 bridge for the management interface (fxp0)
 -	Add serial port for terminal access. Command to access the vJunos console:
-```
+	```
 	qm terminal <vmid>
-```
+	```
 
 Import vjunos image(.qcow2) as a virtio0 drive attached to the new vJunos VM via CLI:
 -	Import corresponding vJunos Image to the base vJunos VM
-```
+	```
 	qm importdisk <vmid> <imagefilename.qcow2> <storage-pool> -format qcow2
-```
+	```
 -	The disk should show up in the UI as ‘Unused Disk 0’ in the Hardware section of the VM.
 -	Click the disk, then ‘Edit’. Change to ‘VirtIO/Block’ and then click ‘Add’.
 -	Go to Options and change the boot order so the new disk is the first boot option.
@@ -46,25 +46,26 @@ Import vjunos image(.qcow2) as a virtio0 drive attached to the new vJunos VM via
 Set the qemu args properly as below, once the VMs are created from UI:
 -	get the VM id for the vJuons VM and edit respective VM config file located at: ‘/etc/pve/qemu-server/\<vmid\>.conf’
 - 	add the specific qemu args at ‘/etc/pve/qemu-server/\<vmid\>.conf’ as below:
-  
 	-	for vjunos-switch add below line at the staring of the file:   
 	```	
 	args: -machine accel=kvm:tcg -smbios type=1,product=VM-VEX -cpu 'host,kvm=on'
 	```
- 
 	-	for vjunos-router add below line at the staring of the file:
 	```
 	args: -machine accel=kvm:tcg -smbios type=1,product=VM-VMX,family=lab -cpu 'host,kvm=on'
 	```
-
 	-	for vjunos-evolved add below line at the staring of the file:
-```
+	```
 	args: -machine accel=kvm:tcg -smbios 'type=0,vendor=Bochs,version=Bochs'  -smbios 'type=3,manufacturer=Bochs' -smbios 'type=1,manufacturer=Bochs,product=Bochs,serial=chassis_no=0:slot=0:type=1:assembly_id=0x0d20:platform=251:master=0: channelized=yes' -cpu host
-```	
+	```	
+
 Power on VM and ensure that the vJunos VM boots. From here you can assign an IP address to fxp0 or you can shut the VM down and make it into a template for cloning to new vjunos nodes.
+-	Commands to power on vJunos VM and login to console from CLI at Proxmox Host:
+	```
+	qm start <vmid> && qm terminal <vmid>
+	```
 
-
-Note: All vJunos need to shutdown gracefully to maintain the last committed config for next boot. Use the below junos CLI command to power down the vJunos:
+Note: All vJunos needs to shutdown gracefully to maintain the last committed config for next boot. Use the below junos CLI command to power down the vJunos gracefully:
 ```
 request system power-off at now
 ```
@@ -80,10 +81,10 @@ Alternately, you can use below 2 scripts to automate the VM boot(for vJunos-swit
 
 - copy the disk folder under /root/
 - Edit the below .sh scripts & provide the vjunos Image location & proxmox LVM/DISK storage name
-```
-  nano /root/disk/vjunos-switch/rebuild-vjunos.sh
-  nano /root/disk/vjunos-router/rebuild-vjunos.sh
-```
+	```
+  	nano /root/disk/vjunos-switch/rebuild-vjunos.sh
+  	nano /root/disk/vjunos-router/rebuild-vjunos.sh
+	```
 - next make sure the vJunos VM is powered off
 - next for vjunos-switch go to /root/disk/vjunos-switch/ and execute the below command:
 ```
