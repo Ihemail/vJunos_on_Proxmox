@@ -67,7 +67,7 @@ Power on VM and ensure that the vJunos VM boots. From here you can assign an IP 
 
 Note: All vJunos needs to shutdown gracefully to maintain the last committed config for next boot. Use the below junos CLI command to power down the vJunos gracefully:
 ```
-request system power-off at now
+vjunos1> request system power-off at now
 ```
 Shutdown from junos shell or power off the VM can corrupt the VM disk or the latest committed config. Therefore, to keep the last committed config always gracefully shutdown the vJunos VM.
 
