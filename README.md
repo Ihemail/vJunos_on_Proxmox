@@ -34,7 +34,7 @@ Create a new VM with below minimum settings:
 	qm terminal <vmid>
 ```
 
-Import vjunos image(.qcow2) file as a virtio0 drive attached to the new VM via CLI:
+Import vjunos image(.qcow2) as a virtio0 drive attached to the new vJunos VM via CLI:
 -	Import corresponding vJunos Image to the base vJunos VM
 ```
 	qm importdisk <vmid> <imagefilename.qcow2> <storage-pool> -format qcow2
@@ -47,16 +47,18 @@ Set the qemu args properly as below, once the VMs are created from UI:
 -	get the VM id for the vJuons VM and edit respective VM config file located at: ‘/etc/pve/qemu-server/\<vmid\>.conf’
 - 	add the specific qemu args at ‘/etc/pve/qemu-server/\<vmid\>.conf’ as below:
   
-	--	for vjunos-switch add below line at the staring of the file:
+	-	for vjunos-switch add below line at the staring of the file:
+   
 ```	
 	args: -machine accel=kvm:tcg -smbios type=1,product=VM-VEX -cpu 'host,kvm=on'
 ```
-
-	-- 	for vjunos-router add below line at the staring of the file:
+   
+	- 	for vjunos-router add below line at the staring of the file:
 ```
 	args: -machine accel=kvm:tcg -smbios type=1,product=VM-VMX,family=lab -cpu 'host,kvm=on'
 ```
-	-- 	for vjunos-evolved add below line at the staring of the file:
+   
+	- 	for vjunos-evolved add below line at the staring of the file:
 ```
 	args: -machine accel=kvm:tcg -smbios 'type=0,vendor=Bochs,version=Bochs'  -smbios 'type=3,manufacturer=Bochs' -smbios 'type=1,manufacturer=Bochs,product=Bochs,serial=chassis_no=0:slot=0:type=1:assembly_id=0x0d20:platform=251:master=0: channelized=yes' -cpu host
 ```	
