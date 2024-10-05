@@ -96,7 +96,7 @@ Alternately, you can use below 2 scripts to automate the VM boot(for vJunos-swit
 	Usage :  sh rebuild-vjunos.sh <juniper-config> <vjunos-vm-id>
 	Example: sh rebuild-vjunos.sh vjunos.conf 6202
 	```
-- next normally boot the vjunos node and 
+- next normally boot the vjunos node and login via console or ssh to fxp0 IP.
 
 
 
@@ -122,4 +122,6 @@ Alternately, you can use below 2 scripts to automate the VM boot(for vJunos-swit
 	Example: sh rebuild-vjunos-shutdown.sh 192.168.0.250 6202
 	```
   during the execution provide the vjunos login credentials to fetch the latest committed config from vjunos node.
+
+- next normally boot the vjunos node and login via console or ssh to fxp0 IP.
 
