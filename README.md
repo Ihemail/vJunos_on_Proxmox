@@ -88,13 +88,17 @@ Alternately, you can use below 2 scripts to automate the VM boot(for vJunos-swit
 - next make sure the vJunos VM is powered off
 - next for vjunos-switch go to /root/disk/vjunos-switch/ and execute the below command:
 	```
-	Usage :  sh rebuild-vjunos.sh <juniper-config> <vjunos-vm-id>	
-	Example: sh rebuild-vjunos.sh vjunos.conf 6201
+	root@Proxmox:~# cd /root/disk/vjunos-switch/
+	root@Proxmox:~/disk/vjunos-switch# sh rebuild-vjunos.sh vjunos.conf 6201
+        root@Proxmox:~/disk/vjunos-switch# ./rebuild-vjunos.sh -help
+ 	Usage :  sh rebuild-vjunos.sh <juniper-config> <vjunos-vm-id>	
 	```
 - next for vjunos-router go to /root/disk/vjunos-router/ and execute the below command:
 	```
+ 	root@Proxmox:~# cd /root/disk/vjunos-router/
+	root@Proxmox:~/disk/vjunos-router# sh rebuild-vjunos.sh vjunos.conf 6202
+        root@Proxmox:~/disk/vjunos-router# ./rebuild-vjunos.sh -help
 	Usage :  sh rebuild-vjunos.sh <juniper-config> <vjunos-vm-id>
-	Example: sh rebuild-vjunos.sh vjunos.conf 6202
 	```
 - next normally boot the vjunos node and login via console or ssh to fxp0 IP.
 
@@ -111,15 +115,19 @@ Alternately, you can use below 2 scripts to automate the VM boot(for vJunos-swit
 - next make sure the vJunos VM is powered on with fxp0 IP and reachability.
 - next for vjunos-switch go to /root/disk/vjunos-switch/ and execute the below command:
 	```
+  	root@Proxmox:~# cd /root/disk/vjunos-switch/
+	root@Proxmox:~/disk/vjunos-switch# sh rebuild-vjunos-shutdown.sh 192.168.0.251 6201
+        root@Proxmox:~/disk/vjunos-switch# ./rebuild-vjunos-shutdown.sh -help
 	Usage :  sh rebuild-vjunos-shutdown.sh <vjunos-fxp0-IP> <vjunos-vm-id>
-	Example: sh rebuild-vjunos-shutdown.sh 192.168.0.251 6201
 	```
   during the execution provide the vjunos login credentials to fetch the latest committed config from vjunos node.
 
 - next for vjunos-router go to /root/disk/vjunos-router/ and execute the below command:
 	```
+   	root@Proxmox:~# cd /root/disk/vjunos-router/
+	root@Proxmox:~/disk/vjunos-router# sh rebuild-vjunos-shutdown.sh 192.168.0.250 6202
+        root@Proxmox:~/disk/vjunos-router# ./rebuild-vjunos-shutdown.sh -help
 	Usage :  sh rebuild-vjunos-shutdown.sh <vjunos-fxp0-IP> <vjunos-vm-id>
-	Example: sh rebuild-vjunos-shutdown.sh 192.168.0.250 6202
 	```
   during the execution provide the vjunos login credentials to fetch the latest committed config from vjunos node.
 
