@@ -3,7 +3,8 @@ vJunos(switch, router & vEVO) deployment on Proxmox 8.2.x
 
 ### vJunos Overview
 
-vJunos is a virtual version of a Juniper switch/router/EVO based switch that runs the Junos OS. vJunos has majorly 3 flavors: vJunos-switch, vJunos-router & vJunosEvolved 
+vJunos is a virtual version of a Juniper switch/router/EVO based switch that runs the Junos OS. vJunos has majorly 3 flavors: vJunos-switch, vJunos-router & vJunosEvolved.
+
 You can install a vJunos-switch or vJunos-router or vJunosEvolved as a virtual machine (VM) on an x86 server.
 
 The vJunos-switch is built using EX9214 as a reference Juniper switch and supports a single Routing Engine and single Flexible PIC Concentrator (FPC).
