@@ -80,7 +80,7 @@ Alternately, you can use below 2 scripts to automate the VM boot(for vJunos-swit
 ### Boot vJunos VM with pre-loaded base configs 
 
 - copy the disk folder under /root/
-- Edit the below .sh scripts & provide the vjunos Image location & proxmox LVM/DISK storage name
+- Edit the below .sh scripts & provide the vjunos Image location & proxmox LVM/Disk storage name
 	```
   	nano /root/disk/vjunos-switch/rebuild-vjunos.sh
   	nano /root/disk/vjunos-router/rebuild-vjunos.sh
@@ -103,7 +103,7 @@ Alternately, you can use below 2 scripts to automate the VM boot(for vJunos-swit
 ### Shutdown script to prepare VM Disks with latest config for next boot
 
 - copy the disk folder under /root/
-- Edit the below .sh scripts & provide the vjunos Image location & proxmox LVM/DISK storage name
+- Edit the below .sh scripts & provide the vjunos Image location & proxmox LVM/Disk storage name
 	```
 	nano /root/disk/vjunos-switch/rebuild-vjunos-shutdown.sh
 	nano /root/disk/vjunos-router/rebuild-vjunos-shutdown.sh
