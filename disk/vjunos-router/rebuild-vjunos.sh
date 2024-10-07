@@ -36,8 +36,8 @@ sh make-conf-disk-23.2.sh $1 config-disk.img
  qm importdisk $2 $VJUNOSIMG $PROXMOXLVM -format qcow2
  qm importdisk $2 config-disk.img $PROXMOXLVM -format raw
 
-sed -i "s/unused0: hdd-lvm:vm-$2-disk-0/virtio0: hdd-lvm:vm-$2-disk-0,iothread=1,size=32524M/g" /etc/pve/qemu-server/$2.conf
-sed -i "s/unused1: hdd-lvm:vm-$2-disk-1/ide0: hdd-lvm:vm-$2-disk-1,size=16M/g" /etc/pve/qemu-server/$2.conf
+sed -i "s/unused0: $PROXMOXLVM:vm-$2-disk-0/virtio0: $PROXMOXLVM:vm-$2-disk-0,iothread=1,size=32524M/g" /etc/pve/qemu-server/$2.conf
+sed -i "s/unused1: $PROXMOXLVM:vm-$2-disk-1/ide0: $PROXMOXLVM:vm-$2-disk-1,size=16M/g" /etc/pve/qemu-server/$2.conf
 sed -i "s/boot: /boot: order=virtio0/g" /etc/pve/qemu-server/$2.conf
 
 rm -rf juniper.conf.gz
