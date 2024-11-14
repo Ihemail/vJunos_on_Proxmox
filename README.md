@@ -139,7 +139,7 @@ Alternately, you can use below 2 scripts to automate the VM boot(for vJunos-swit
   
   	GUI: from Server view : Proxmox-server -> VMID -> Hardware -> Network Device (netX) <edit> -> Untick "Firewall:" box
   
-  	CLI: Modify /etc/pve/qemu-server/VMID.conf as below, then same the file and start the VM.
+  	CLI: Modify /etc/pve/qemu-server/VMID.conf as below, then save the file and start the VM.
   	```
 	root@Proxmox-Dell7070:~# nano /etc/pve/qemu-server/6008.conf 
 	. . .
