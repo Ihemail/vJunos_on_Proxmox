@@ -136,7 +136,9 @@ Alternately, you can use below 2 scripts to automate the VM boot(for vJunos-swit
 ### Activate LLDP & LACP over the VMX interfaces/linux bridge
 
 - First disable the firewall from each side of the LLDP or LACP tap interfaces
+  
   	GUI: from Server view : Proxmox-server -> VMID -> Hardware -> Network Device (netX) <edit> -> Untick "Firewall:" box
+  
   	CLI: Modify /etc/pve/qemu-server/VMID.conf as below, then same the file and start the VM.
   	```
 	root@Proxmox-Dell7070:~# nano /etc/pve/qemu-server/6008.conf 
