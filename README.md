@@ -143,12 +143,12 @@ Alternately, you can use below 2 scripts to automate the VM boot(for vJunos-swit
 	. . .
 	net4: virtio=BC:24:11:24:E8:09,bridge=vmbr501,firewall=1
 	net5: virtio=BC:24:11:62:74:EE,bridge=vmbr502,firewall=1
-   	. . .
-   	<modify to>
-   	. . .
+	. . .
+	<modify to>
+	. . .
 	net4: virtio=BC:24:11:24:E8:09,bridge=vmbr501
 	net5: virtio=BC:24:11:62:74:EE,bridge=vmbr502
-   	. . .
+	. . .
    	``` 
 - Next get the bridge name & tap interfaces detals with brctl commands:
 	```
